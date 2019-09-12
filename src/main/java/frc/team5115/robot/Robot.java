@@ -1,30 +1,22 @@
 package frc.team5115.robot;
 
-import edu.wpi.first.wpilibj.Controller;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.command.Scheduler;
+import frc.team5115.subsystems.*;
 
 public class Robot extends TimedRobot {
-//Olivia
-//Yeab
-//marie
+    //Olivia
+    //Yeab
+    //marie
     public static Arm arm;
-    public static Controller joy;
+    public static Joystick joy;
 
     public void robotInit() {
-        joy = new ThrustMaster(0);
+        joy = new Joystick(0);
         arm = new Arm();
     }
-    public void teleopInit(){}
 
     public void teleopPeriodic() {
-        arm.moveArm()
+        arm.moveArm();
     }
-    public void autonomousInit(){
-        previousTime = 0;
-        driveTrain.resetEncoders();
-    }
-    public void autonomousPeriodic(){
-
-    }
-
+}
