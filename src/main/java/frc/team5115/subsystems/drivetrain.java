@@ -12,10 +12,10 @@ public class drivetrain {
     TalonSRX backRight;
 
     public drivetrain() {
-        frontLeft = new TalonSRX(0);
-        frontRight = new TalonSRX(1);
-        backLeft = new TalonSRX(2);
-        backRight = new TalonSRX(3);
+        frontLeft = new TalonSRX(1);
+        frontRight = new TalonSRX(2);
+        backLeft = new TalonSRX(3);
+        backRight = new TalonSRX(4);
 
         frontLeft.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
         frontRight.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
@@ -24,6 +24,7 @@ public class drivetrain {
     }
 
     public void drive(double x, double y, double thrott) {
+        y *= -1;
         double leftSpd = (y + x) * thrott;
         double rightSpd= (y - x) * thrott;
 
