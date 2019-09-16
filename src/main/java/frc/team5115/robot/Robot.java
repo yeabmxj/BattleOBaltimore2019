@@ -18,9 +18,4 @@ public class Robot extends TimedRobot {
     public void robotPeriodic() {
         dt.drive(j.getRawAxis(0), j.getRawAxis(1), 0.35); //change thrott with 1-j.getRawAxis(3)
     }
-} /*
-  _  _
-  #  #
-   ||
-  \__/
-*/
+} 
