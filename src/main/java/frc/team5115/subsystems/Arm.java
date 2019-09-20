@@ -2,29 +2,37 @@ package frc.team5115.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SPI;
 
 import static frc.team5115.robot.Robot.joy;
 
 public class Arm {
-    public TalonSRX arm;
+    private victor arm;
 
     public Arm(){
-        arm = new TalonSRX(0);
+        arm = new victor(2, 8, 9);
+
         arm.setInverted(false);
     }
 
     public void moveArm(){
-        if(joy.getRawButton(14)){
-            arm.set(ControlMode.PercentOutput, 0.35);
+        if (joy.getRawButton(4)) {
+            arm.set(ControlMode.PercentOutput, .5);
+        }
+        else if (joy.getRawButton(2))
+        {
+            arm.set(ControlMode.PercentOutput, -.45);
+        }
+        else
+        {
+            armStop();
+        }
+    }
 
-        }
-        else if(joy.getRawButton(15)){
-            arm.set(ControlMode.PercentOutput, -0.35);
-        }
-        else{
-            arm.set(ControlMode.PercentOutput, 0);
-        }
-        }
+    public void armStop() {
+        arm.set(ControlMode.PercentOutput,0);
+    }
 }

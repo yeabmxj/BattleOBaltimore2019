@@ -28,8 +28,8 @@ public class drivetrain {
         double leftSpd = (y + x) * thrott;
         double rightSpd= (y - x) * thrott;
 
-        frontLeft.set(ControlMode.PercentOutput, leftSpd);
-        backLeft.set(ControlMode.PercentOutput, leftSpd);
+        frontLeft.set(ControlMode.PercentOutput, -leftSpd);
+        backLeft.set(ControlMode.PercentOutput, -leftSpd);
         frontRight.set(ControlMode.PercentOutput, rightSpd);
         backRight.set(ControlMode.PercentOutput, rightSpd);
 
