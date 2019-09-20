@@ -4,12 +4,16 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import frc.team5115.robot.Robot;
 
+import static frc.team5115.robot.Robot.joy;
+
 public class drivetrain {
 
     TalonSRX frontLeft;
     TalonSRX frontRight;
     TalonSRX backLeft;
     TalonSRX backRight;
+
+    private double throttle = .5;
 
     public drivetrain() {
         frontLeft = new TalonSRX(1);
@@ -33,6 +37,17 @@ public class drivetrain {
         frontRight.set(ControlMode.PercentOutput, rightSpd);
         backRight.set(ControlMode.PercentOutput, rightSpd);
 
+    }
+
+    public double throttle() {
+        throttle += 0.01 *(joy.getRawAxis(3) - joy.getRawAxis(2));
+
+        if (throttle > 1){
+            throttle = 1;
+        } else if(throttle < 0){
+            throttle = 0;
+        }
+        return throttle;
     }
 
     public void resetEncoders() {

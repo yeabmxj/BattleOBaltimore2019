@@ -21,7 +21,7 @@ public class Robot extends TimedRobot {
     public void teleopPeriodic() {
         arm.moveArm();
         w.moveY();
-        dt.drive(joy.getRawAxis(0), joy.getRawAxis(1), 0.35); //change thrott with 1-j.getRawAxis(3)
+        dt.drive(joy.getRawAxis(0), joy.getRawAxis(4), 0.35);
         
     }
 }

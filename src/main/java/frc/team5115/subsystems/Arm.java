@@ -20,11 +20,21 @@ public class Arm {
 
     public void moveArm(){
         if (joy.getRawButton(4)) {
-            arm.set(ControlMode.PercentOutput, .5);
+            if (!arm.getUpperHit()) {
+                arm.set(ControlMode.PercentOutput, .5);
+            }
+            else {
+                armStop();
+            }
         }
         else if (joy.getRawButton(2))
         {
-            arm.set(ControlMode.PercentOutput, -.45);
+            if (!arm.getLowerHit()) {
+                arm.set(ControlMode.PercentOutput, -.45);
+            }
+            else {
+                armStop();
+            }
         }
         else
         {
@@ -36,3 +46,7 @@ public class Arm {
         arm.set(ControlMode.PercentOutput,0);
     }
 }
+
+
+//Throttle, with the analog controller
+//One stick does y axis and the other does x

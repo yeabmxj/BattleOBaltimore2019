@@ -28,6 +28,7 @@ public class victor extends VictorSPX {
         return mLastSet;
     }
 
+
     @Override
     public void set(ControlMode mode, double value) {
         double temp = value;
@@ -43,7 +44,8 @@ public class victor extends VictorSPX {
             super.set(mode, temp);
         }
     }
-
+    public boolean getUpperHit() { return upper.get(); }
+    public boolean getLowerHit() { return lower.get(); }
     public boolean switchHit(){
         return !upper.get() || !lower.get();
     }
