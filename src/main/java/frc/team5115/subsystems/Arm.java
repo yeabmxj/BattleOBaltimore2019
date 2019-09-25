@@ -10,17 +10,20 @@ import edu.wpi.first.wpilibj.SPI;
 import static frc.team5115.robot.Robot.joy;
 
 public class Arm {
-    private victor arm;
+    private VictorSPX arm;
+    private DigitalInput upper;
+    private DigitalInput lower;
 
     public Arm(){
-        arm = new victor(2, 8, 9);
-
+        arm = new VictorSPX(2);
+        upper = new DigitalInput(8);
+        lower = new DigitalInput(9);
         arm.setInverted(false);
     }
 
     public void moveArm(){
         if (joy.getRawButton(4)) {
-            if (!arm.getUpperHit()) {
+            if (upper.get()) {
                 arm.set(ControlMode.PercentOutput, .5);
             }
             else {
@@ -29,7 +32,7 @@ public class Arm {
         }
         else if (joy.getRawButton(2))
         {
-            if (!arm.getLowerHit()) {
+            if (lower.get()) {
                 arm.set(ControlMode.PercentOutput, -.45);
             }
             else {

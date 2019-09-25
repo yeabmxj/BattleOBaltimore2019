@@ -28,7 +28,7 @@ public class drivetrain {
     }
 
     public void drive(double x, double y, double thrott) {
-        y *= -1;
+        x *= -1;
         double leftSpd = (y + x) * thrott;
         double rightSpd= (y - x) * thrott;
 
@@ -40,7 +40,7 @@ public class drivetrain {
     }
 
     public double throttle() {
-        throttle += 0.01 *(joy.getRawAxis(3) - joy.getRawAxis(2));
+        throttle += 0.03 *(joy.getRawAxis(3) - joy.getRawAxis(2));
 
         if (throttle > 1){
             throttle = 1;

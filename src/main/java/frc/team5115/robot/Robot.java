@@ -10,19 +10,21 @@ public class Robot extends TimedRobot {
     public static Joystick joy;
     public static drivetrain dt;
     public static wrist w;
+    public static Limelight camera;
 
     public void robotInit() {
         joy = new Joystick(0);
         arm = new Arm();
         dt = new drivetrain();
         w = new wrist();
+        camera = new Limelight();
+        camera.cameraMode();
     }
 
-    public void teleopPeriodic() {
+    public void robotPeriodic() {
         arm.moveArm();
         w.moveY();
-        dt.drive(joy.getRawAxis(0), joy.getRawAxis(4), 0.35);
-        
+        dt.drive(joy.getRawAxis(4), joy.getRawAxis(1), dt.throttle());
     }
 }
 
