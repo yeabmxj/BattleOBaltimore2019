@@ -17,12 +17,12 @@ public class Arm {
     public Arm(){
         arm = new VictorSPX(2);
         upper = new DigitalInput(8);
-        lower = new DigitalInput(9);
+        lower = new DigitalInput(7);
         arm.setInverted(false);
     }
 
     public void moveArm(){
-        if (joy.getRawButton(4)) {
+        if (joy.getRawButton(6)) {
             if (upper.get()) {
                 arm.set(ControlMode.PercentOutput, .5);
             }
@@ -30,10 +30,10 @@ public class Arm {
                 armStop();
             }
         }
-        else if (joy.getRawButton(2))
+        else if (joy.getRawButton(5))
         {
             if (lower.get()) {
-                arm.set(ControlMode.PercentOutput, -.45);
+                arm.set(ControlMode.PercentOutput, -.4);
             }
             else {
                 armStop();

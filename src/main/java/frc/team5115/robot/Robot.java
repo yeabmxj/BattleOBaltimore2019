@@ -12,6 +12,9 @@ public class Robot extends TimedRobot {
     public static wrist w;
     public static Limelight camera;
 
+    double THROTTLE_GAIN = .001;
+    double SPEED_CAP = 1;
+
     public void robotInit() {
         joy = new Joystick(0);
         arm = new Arm();
@@ -24,7 +27,9 @@ public class Robot extends TimedRobot {
     public void robotPeriodic() {
         arm.moveArm();
         w.moveY();
-        dt.drive(joy.getRawAxis(4), joy.getRawAxis(1), dt.throttle());
+        System.out.println("Throttle: "+dt.throttle(THROTTLE_GAIN));
+        System.out.println("Capped Throttle: "+dt.throttle(THROTTLE_GAIN)*SPEED_CAP);
+        dt.drive(joy.getRawAxis(4), joy.getRawAxis(1), dt.throttle(THROTTLE_GAIN), SPEED_CAP);
     }
 }
 

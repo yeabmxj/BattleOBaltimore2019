@@ -14,6 +14,7 @@ public class drivetrain {
     TalonSRX backRight;
 
     private double throttle = .5;
+    private double MIN_VALUE = 0;
 
     public drivetrain() {
         frontLeft = new TalonSRX(1);
@@ -27,25 +28,27 @@ public class drivetrain {
         backRight.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
     }
 
-    public void drive(double x, double y, double thrott) {
+    public void drive(double x, double y, double thrott, double speedCap) {
+        y *= -1;
         x *= -1;
-        double leftSpd = (y + x) * thrott;
-        double rightSpd= (y - x) * thrott;
+        double leftSpd = ((y + x) * thrott)*speedCap;
+        double rightSpd= ((y - x) * thrott)*speedCap;
 
         frontLeft.set(ControlMode.PercentOutput, -leftSpd);
         backLeft.set(ControlMode.PercentOutput, -leftSpd);
         frontRight.set(ControlMode.PercentOutput, rightSpd);
         backRight.set(ControlMode.PercentOutput, rightSpd);
 
+
     }
 
-    public double throttle() {
-        throttle += 0.03 *(joy.getRawAxis(3) - joy.getRawAxis(2));
+    public double throttle(double t) {
+        throttle += t *(joy.getRawAxis(3) - joy.getRawAxis(2));
 
         if (throttle > 1){
             throttle = 1;
-        } else if(throttle < 0){
-            throttle = 0;
+        } else if(throttle < MIN_VALUE){
+            throttle = MIN_VALUE;
         }
         return throttle;
     }
